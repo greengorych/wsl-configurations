@@ -17,19 +17,6 @@ This repository helps you customize, optimize and automate deployment your WSL e
 - [**wsl.conf**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/wsl.conf) - a fully commented default configuration file that replicates the behavior of individual WSL distributions as if it were the original configuration file shipped with the distro.
 - [**cloud-init**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init) - a fully commented cloud-init **default.user-data** configuration file, tailored specifically for WSL (Windows Subsystem for Linux) distributions that support initialization through cloud-init.
 
-### Examples
-
-- **adduser** - example 
-- **ansible** -  example creating a Python virtual environment in the user's home directory (~/ansible-venv), upgrading pip and installing ansible, ansible-lint and molecule into this environment with cloud-init
-- **bridged** - example 
-- **dns** - example
-- **hostname** - example
-- **motd** - example
-- **ntp** - example
-- **packages** - example instaling packages with cloud-init
-- **ubuntupro** - example
-- **upgrade** - example upgrade packeges with cloud-init
-
 ## How to Use
 
 You can find usage information in the instructions provided with each example.
