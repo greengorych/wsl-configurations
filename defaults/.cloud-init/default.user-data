@@ -1,0 +1,145 @@
+#cloud-config
+
+write_files:
+  - path: /etc/wsl.conf
+    permissions: "0644"
+    content: |
+      # WSL per-distribution configuration file (wsl.conf)
+      # Located inside each WSL distro at: /etc/wsl.conf
+      # Controls behavior of individual WSL distributions.
+      # The latest version of this configuration file is available at:
+      # https://github.com/greengorych/wsl-configurations/tree/main/wsl.conf
+
+      [boot]
+      # Enable or disable systemd support inside the distro
+      # Available since: Windows 11 22H2+
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      systemd=true
+
+      # Command(s) to run at every boot (as root)
+      # Available since: Windows 11 22H2+
+      # Dependencies: None
+      # Default: Not set
+      # Example: command="service docker start"
+      command=
+
+      [automount]
+      # Controls whether Windows drives are automatically mounted under /mnt
+      # Available since: Windows 10 17093
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      enabled=true
+
+      # Automatically mount entries from /etc/fstab
+      # Available since: Windows 10 17093
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      mountFsTab=true
+
+      # Sets the mount point for automatically mounted drives
+      # Available since: Unknown
+      # Dependencies:
+      # [automount]
+      # enabled=true
+      # Default: /mnt/
+      # Values: Any valid directory path.
+      root=/mnt/
+
+      # Additional mount options passed to drvfs when mounting Windows drives (e.g., /mnt/c).
+      # These options control file ownership, permissions, and behavior of mounted Windows filesystems in WSL.
+      # Available since: Unknown
+      # Dependencies:
+      # [automount]
+      # enabled=true
+      # Default: None (WSL uses internal defaults if not specified)
+      # Values (comma-separated):
+      # - uid=UID         : User ID used as the owner of all files (default: 1000 – first created user).
+      # - gid=GID         : Group ID used as the owner of all files (default: 1000 – default user group).
+      # - umask=MODE      : Octal permission mask applied to all files and directories (default: 022).
+      # - fmask=MODE      : Octal mask applied only to files (default: 000).
+      # - dmask=MODE      : Octal mask applied only to directories (default: 000).
+      # - metadata        : Enables storage of Linux file permissions (uid/gid/mode) in Windows files (default: disabled).
+      # - case=MODE       : Controls case sensitivity behavior.
+      #   - off   : Case insensitivity (default).
+      #   - dir   : Enables case sensitivity for specific directories.
+      #   - force : Forces all new directories to be case-sensitive.
+      # Example: options="metadata,uid=1000,gid=1000,umask=022,fmask=000,dmask=000,case=off"
+      options=
+
+      [network]
+      # Sets the hostname of the distro
+      # Available since: Windows 10 17093
+      # Dependencies: None
+      # Default: Windows hostname
+      # hostname=
+
+      # Controls whether /etc/resolv.conf is automatically generated
+      # Available since: Windows 10 17093
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      generateResolvConf=true
+
+      # Controls whether WSL modifies /etc/hosts automatically
+      # Available since: Windows 10 17093
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      generateHosts=true
+
+      [interop]
+      # Enables Windows and Linux interop (launching Windows apps from Linux)
+      # Available since: Windows 10 17713
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      enabled=true
+
+      # Specifies whether to append Windows path to $PATH
+      # Available since: Windows 10 17713
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      appendWindowsPath=true
+
+      [user]
+      # Default Linux user for this distribution (username only, not UID)
+      # Available since: Windows 10 18980 
+      # Dependencies: Must be an existing user inside the distro
+      # Default: First created user
+      # Example: default=username
+      default=<UserName>
+
+      # End of configuration file
+
+users:
+  - name: <UserName>
+    gecos: <UserName>
+    homedir: /home/<UserName>
+    groups: sudo
+    sudo: ALL=(ALL) ALL
+    shell: /bin/bash
+
+chpasswd:
+  expire: false
+  users:
+    - name: <UserName>
+      password: <Password Hash>
