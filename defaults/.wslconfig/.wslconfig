@@ -1,0 +1,234 @@
+# WSL configuration file (.wslconfig)
+# Located at: C:\Users\<UserName>\.wslconfig
+# Controls global WSL2 virtual machine settings.
+# The latest version of this configuration file is available at:
+# https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
+
+[wsl2]
+
+# Absolute Windows path to a custom Linux kernel.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: Built-in Microsoft kernel
+# Example: kernel=C:\\Path\\To\\CustomKernel
+# kernel=
+
+# Path to a VHD with Linux kernel modules.
+# Available since: Windows 10 18362+
+# Default: Not set
+# Example: kernelModules=C:\\Path\\To\\Modules.vhdx
+# kernelModules=
+
+# Extra kernel parameters to pass during boot.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: Empty
+# Example: kernelCommandLine=quiet splash
+# kernelCommandLine=
+
+# Limit the number of logical CPU cores used.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: All available logical processors
+# Example: processors=2
+# processors=
+
+# Limit the amount of RAM used by WSL2 virtual machine.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: 50% of total physical RAM
+# Example: memory=4GB
+# memory=
+
+# Swap file size used by WSL VM.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: 25% of RAM, rounded to nearest GB
+# Example: swap=8GB, swap=0 to disable
+# swap=
+
+# Custom path for swap file.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: A temporary path like %USERPROFILE%\AppData\Local\Temp\<GUID>\swap.vhdx
+# Example: swapFile=C:\\Path\\To\\swap.vhdx
+# swapFile=
+
+# Default virtual disk size (applies when creating new distros).
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: 1TB (dynamically allocated)
+# Example: defaultVhdSize=20GB
+defaultVhdSize=1TB
+
+# Virtual switch used for the WSL2 virtual machine.
+# Available since: Windows 10 18362+
+# Dependencies: Required only for networkingMode=bridged. Requires Hyper-V and a manually created virtual switch.
+# Default: Default Switch (if not specified)
+# Example: vmSwitch=MyCustomSwitch
+# vmSwitch=
+
+# Network mode for WSL.
+# Available since: Windows 11 22H2+
+# Dependencies: In networkingMode=bridged requires a virtual switch to be configured and Hyper-V to be enabled.
+# Default: nat
+# Values:
+# - nat
+# - mirrored
+# - bridged
+networkingMode=nat
+
+# Enable or disable localhost port forwarding.
+# Available since: Windows 10 18362+
+# Dependencies: Does not work in networkingMode=mirrored.
+# Default: true
+# Values:
+# - true
+# - false
+localhostForwarding=true
+
+# Enable DNS proxy between Windows and WSL.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+dnsProxy=true
+
+# Tunnel DNS queries via Windows networking.
+# Available since: Windows 22H2+
+# Dependencies:
+# - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
+# - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
+# Default: true
+# Values:
+# - true
+# - false
+dnsTunneling=true
+
+# Enable Windows Firewall and Hyper-V network filters for WSL.
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+firewall=true
+
+# Use system proxy settings from Windows.
+# Available since: Windows 11
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+autoProxy=true
+
+# Boot WSL in safe recovery mode.
+# Available since: Windows 11
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+safeMode=false
+
+# Enable support for GUI Linux apps (WSLg).
+# Available since: Windows 11
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+guiApplications=true
+
+# Show debug console with dmesg output (opens on virtual machine startup).
+# Available since: Windows 11
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+debugConsole=false
+
+# Enable nested virtualization.
+# Available since: Windows 11
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+nestedVirtualization=true
+
+# Time in milliseconds before the WSL VM is shut down after inactivity.
+# Available since: Windows 11
+# Dependencies: None
+# Default: 60000 (1 minute). Set to 0 to keep the VM always running (disable auto shutdown).
+vmIdleTimeout=60000
+
+[experimental]
+
+# Memory reclaim behavior
+# Available since: Windows 11
+# Dependencies: None
+# Default: gradual
+# Values:
+# - disabled: Turn off memory reclaim
+# - gradual: Release memory slowly after 10 mins of CPU inactivity
+# - dropcache: Release all cached memory after idle is detected
+autoMemoryReclaim=gradual
+
+# Enable dynamically shrinking virtual disk
+# Available since: Windows 11 
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+sparseVhd=true
+
+# Improve DNS parsing compatibility
+# Available since: Windows 11 22H2+
+# Dependencies:
+# - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
+# - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
+# - dnsTunneling=true (if dnsTunneling=false, bestEffortDnsParsing becomes irrelevant)
+# Default: false
+# Values:
+# - true
+# - false
+bestEffortDnsParsing=false
+
+# IP address to use for DNS tunneling (when enabled)
+# Available since: Windows 11 22H2+
+# Dependencies:
+# - Must be used with networkingMode=nat
+# - Requires dnsProxy=true
+# - Irrelevant if dnsTunneling=false
+# Default: 10.255.255.254
+dnsTunnelingIpAddress=10.255.255.254
+
+# Timeout for reading Windows proxy on startup (in milliseconds).
+# Available since: Windows 11
+# Dependencies: autoProxy=true (if autoProxy=false, initialAutoProxyTimeout becomes irrelevant).
+# Default: 1000
+initialAutoProxyTimeout=1000
+
+# Ignore specific ports in mirrored mode
+# Available since: Windows 11 22H2+
+# Dependencies: networkingMode=mirrored 
+# Default: Not set
+# Example: ignoredPorts=3000,8080
+# ignoredPorts=
+
+# Allow host and container to connect via loopback (127.0.0.1 from inside containers)
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+hostAddressLoopback=false
+
+# End of configuration file
