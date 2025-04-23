@@ -1,5 +1,13 @@
 #cloud-config
 
+# This configuration sets up a WSL environment with:
+# - Custom /etc/wsl.conf parameters
+# - A user account with sudo privileges
+# The latest version of this configuration file is available at:
+# https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init
+
+# Adding default WSL configuration file to /etc/wsl.conf
+
 write_files:
   - path: /etc/wsl.conf
     permissions: "0644"
@@ -77,10 +85,10 @@ write_files:
       options=
 
       [network]
-      # Sets the hostname of the distro
+      # Sets a custom hostname for the distro
       # Available since: Windows 10 17093
       # Dependencies: None
-      # Default: Windows hostname
+      # Default: If not set, WSL uses the Windows hostname
       # hostname=
 
       # Controls whether /etc/resolv.conf is automatically generated
@@ -130,6 +138,8 @@ write_files:
 
       # End of configuration file
 
+# Creating the <UserName> user with home directory, shell, and sudo privileges
+
 users:
   - name: <UserName>
     gecos: <UserName>
@@ -137,6 +147,8 @@ users:
     groups: sudo
     sudo: ALL=(ALL) ALL
     shell: /bin/bash
+
+# Setting password for <UserName> and disabling password expiration
 
 chpasswd:
   expire: false
