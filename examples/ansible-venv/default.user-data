@@ -246,6 +246,16 @@ chpasswd:
     - name: <UserName>
       password: <Password Hash>
 
+##############################################################
+# Update system packages and install Python venv prerequisites
+##############################################################
+
+package_update: true
+package_upgrade: true
+packages:
+  - python3-venv
+  - python3-pip
+
 #################################################################
 # Create a Python virtual environment and install Ansible-related
 # tools at: /home/<UserName>/ansible-venv
