@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a fully commented [`wsl.conf`](https://github.com/greengorych/wsl-configurations/blob/main/defaults/wsl.conf/wsl.conf) configuration file, designed to match the standard behavior of WSL instances, as if it were part of the default distribution installation. It provides detailed explanations for each section and parameter, including default values, available options, and dependencies, making it easier to understand and customize your configuration.
+This is a fully commented [`wsl.conf`](https://github.com/greengorych/wsl-configurations/blob/main/defaults/wsl.conf/wsl.conf) configuration file, designed to reflect the standard behavior of WSL instances, as if it were included with a default distribution installation. It provides detailed explanations for each section and parameter, including default values, available options, and dependencies, making it easier to understand and customize your configuration.
 
 >[!NOTE]
 >In this document, the term "instance" refers to an installed and running WSL distribution with its own filesystem and settings.
@@ -28,7 +28,7 @@ This is a fully commented [`wsl.conf`](https://github.com/greengorych/wsl-config
 ## Why Use wsl.conf?
 
 - To understand the available configuration options and manage WSL instance behavior.
-- To explicitly define settings rather than relying on hidden defaults.
+- To explicitly define settings instead of relying on implicit defaults.
 - To minimize configuration changes and keep the system as close to the standard behavior as possible.
 
 ## How to Apply the Configuration?
@@ -36,7 +36,7 @@ This is a fully commented [`wsl.conf`](https://github.com/greengorych/wsl-config
 To apply the configuration:
 
 1. Modify the necessary parameters in the `wsl.conf` file.
-2. Replace `<UserName>` with the desired Linux username.
+2. Replace `<UserName>` with the desired default Linux user.
 3. Save the file at `/etc/wsl.conf` inside your WSL instance.
 
 >[!TIP]
