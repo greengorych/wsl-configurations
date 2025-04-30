@@ -224,8 +224,6 @@ write_files:
 # Creating the <UserName> user with home directory, shell, and sudo privileges
 ##############################################################################
 
-# To generate <Password Hash> use: openssl passwd -6 <Password>
-
 users:
   - name: <UserName>
     gecos: <UserName>
@@ -238,6 +236,8 @@ users:
 ###################################################################
 # Setting password for <UserName> and disabling password expiration
 ###################################################################
+
+# To generate <Password Hash> use: openssl passwd -6 <Password>
 
 chpasswd:
   expire: false
