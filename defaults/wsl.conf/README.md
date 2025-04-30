@@ -2,48 +2,61 @@
 
 ## Overview
 
-This is a fully commented default **wsl.conf** file that replicates the behavior of individual WSL distributions as if it were the original configuration file shipped with the distro. It provides detailed explanations of each section and parameter, including default values, dependencies, and possible options, making it easy to modify only what you need.
+This is a fully commented [`wsl.conf`](https://github.com/greengorych/wsl-configurations/blob/main/defaults/wsl.conf/wsl.conf) configuration file, designed to match the standard behavior of WSL instances, as if it were part of the default distribution installation. It provides detailed explanations for each section and parameter, including default values, available options, and dependencies, making it easier to understand and customize your configuration.
 
-## What is **wsl.conf**?
+>[!NOTE]
+>In this document, the term "instance" refers to an installed and running WSL distribution with its own filesystem and settings.
 
-- A per-distribution configuration file for WSL.
-- Controls various settings specific to a single WSL distribution, such as:
-  - System initialization (**systemd**).
-  - Mounting Windows drives and customizing drive behavior.
-  - Network configurations (**resolv.conf**, **hosts**).
-  - Interoperability between Windows and Linux.
-  - Default user for the distribution.
+>[!IMPORTANT]
+>All parameters in this file match the default WSL values, except for `<UserName>`. If you only update `<UserName>`, the instance will behave exactly like a standard WSL distribution with standard `wsl.conf` configuration.
+
+## What is wsl.conf?
+
+- `wsl.conf` is a configuration file for individual WSL instances.
+- It allows you to manage settings such as:
+  - System initialization (`systemd`).
+  - Mounting Windows drives and configuring their behavior.
+  - Network configuration (`hostname`, `hosts`, `resolv.conf`).
+  - Timezone settings (`timezone`).
+  - Interop between Windows and Linux.
+  - The default Linux user.
   - And more.
 
-## Why use this file?
+>[!WARNING]
+>Some parameters listed in `wsl.conf` are not documented officially. Additional undocumented parameters may also exist.
 
-- Fine-tune individual distribution settings without affecting the global configuration.
-- Modify specific parameters for performance optimization, mount points, or network behavior.
-- Understand and control the way WSL2 interacts with Windows, the file system, and other networked systems.
-- Avoid unnecessary configuration complexity by tweaking only what you need.
+## Why Use wsl.conf?
 
-## Where to place it?
+- To understand the available configuration options and manage WSL instance behavior.
+- To explicitly define settings rather than relying on hidden defaults.
+- To minimize configuration changes and keep the system as close to the standard behavior as possible.
 
-The **wsl.conf** file must be placed inside the root directory of the distribution's file system at: **/etc/wsl.conf**
+## How to Apply the Configuration?
 
-To modify this file, you can use your favorite text editor inside your WSL distro or you can use cloud-init from this default example - [**.cloud-init**](https://github.com/greengorych/wsl-temp/tree/main/defaults/.cloud-init).
+To apply the configuration:
 
-After making changes to wsl.conf, the changes will take effect the next time the WSL distribution is started.
+1. Modify the necessary parameters in the `wsl.conf` file.
+2. Replace `<UserName>` with the desired Linux username.
+3. Save the file at `/etc/wsl.conf` inside your WSL instance.
 
-## Apply Changes
+>[!TIP]
+>Refer to the [**.cloud-init**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init) example and its provided configuration file to automate `wsl.conf` creation.
 
-To apply changes made to wsl.conf, you need to restart your WSL distribution. You can do this by running:
+## How to Apply Changes?
+
+For the configuration changes to take effect, restart the instance:
 
 ```powershell
-wsl -d <DistroName> --shutdown
+wsl -d <InstanceName> --shutdown
 ```
 
-Then start the distro again to see the effects.
+Then start the instance again:
 
-## Default Behavior Summary
-
-All values in this configuration reflect WSL2's default behavior. If you load this file without changing any settings, WSL2 will behave exactly as if no .wslconfig file was present.
+```powershell
+wsl -d <InstanceName>
+```
 
 ## Related links
 
 - [Advanced settings configuration in WSL](https://learn.microsoft.com/en-us/windows/wsl/wsl-config)
+- [default.user-data – Default cloud-init Configuration File](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init)
