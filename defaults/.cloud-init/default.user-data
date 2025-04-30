@@ -20,9 +20,9 @@
 # https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init
 
 
-########################################################
-# Adding default WSL configuration file to /etc/wsl.conf
-########################################################
+#####################################################
+# Add default WSL configuration file to /etc/wsl.conf
+#####################################################
 
 write_files:
   - path: /etc/wsl.conf
@@ -220,9 +220,9 @@ write_files:
       # Default: First created user
       default=<UserName>
 
-##############################################################################
-# Creating the <UserName> user with home directory, shell, and sudo privileges
-##############################################################################
+############################################################################
+# Create the <UserName> user with home directory, shell, and sudo privileges
+############################################################################
 
 users:
   - name: <UserName>
@@ -233,9 +233,9 @@ users:
     sudo: ALL=(ALL) ALL
     shell: /bin/bash
 
-###################################################################
-# Setting password for <UserName> and disabling password expiration
-###################################################################
+###############################################################
+# Set password for <UserName> and disabling password expiration
+###############################################################
 
 # To generate <Password Hash> use: openssl passwd -6 <Password>
 
