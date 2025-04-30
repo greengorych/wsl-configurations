@@ -1,27 +1,67 @@
 #cloud-config
 
-# This configuration sets up a WSL environment with:
-# - Custom /etc/wsl.conf parameters
-# - A user account with sudo privileges
-# - A Python virtual environment for Ansible development (Ansible, ansible-lint, Molecule)
-# The latest version of this configuration file is available at:
-# https://github.com/greengorych/wsl-configurations/tree/main/examples/ansible-venv
+#################################################################################
+# A cloud-init configuration to customize a WSL instance during its first startup
+#################################################################################
 
-# Adding default WSL configuration file to /etc/wsl.conf
+# Location: C:\Users\<UserName>\.cloud-init\default.user-data
+
+# Purpose:
+#   - Customize /etc/wsl.conf parameters
+#   - Add a user account with sudo privileges
+#   - Create a Python virtual environment for Ansible development (ansible, ansible-lint, molecule)
+
+# =======================================================
+# ⚠️ IMPORTANT
+# Replace "<UserName>" and "<Password Hash>" placeholders
+# with the actual username and password before applying.
+# =======================================================
+
+# Reference:
+# https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init
+
+
+#####################################################
+# Add default WSL configuration file to /etc/wsl.conf
+#####################################################
 
 write_files:
   - path: /etc/wsl.conf
+    owner: root:root
     permissions: "0644"
+    encoding: plain
     content: |
+      ####################################################
       # WSL per-distribution configuration file (wsl.conf)
-      # Located inside each WSL distro at: /etc/wsl.conf
-      # Controls behavior of individual WSL distributions.
-      # The latest version of this configuration file is available at:
-      # https://github.com/greengorych/wsl-configurations/tree/main/wsl.conf
+      ####################################################
+
+      # Location: /etc/wsl.conf
+
+      # Purpose:
+      #   - Configure systemd support
+      #   - Control automount and drive options
+      #   - Manage network settings
+      #   - Manage Timezone
+      #   - Set interop behavior with Windows
+      #   - Define default user
+
+      # ==================================================
+      # ⚠️ IMPORTANT
+      # Replace "<UserName>" placeholder with
+      # the actual username before applying.
+      # ==================================================
+
+      # Reference:
+      # https://github.com/greengorych/wsl-configurations/tree/main/defaults/wsl.conf
+
+      ####################################################
+      # Boot Settings
+      ####################################################
 
       [boot]
-      # Enable or disable systemd support inside the distro
-      # Available since: Windows 11 22H2+
+
+      # Controls whether systemd support is enabled or disabled
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -29,16 +69,21 @@ write_files:
       # - false
       systemd=true
 
-      # Command(s) to run at every boot (as root)
-      # Available since: Windows 11 22H2+
-      # Dependencies: None
+      # Command to run at each boot (as root)
+      # Available in: WSL 2
+      # Dependencies: Only a single command is allowed, without shell pipes, redirection, or multi-line scripts
       # Default: Not set
       # Example: command="service docker start"
-      command=
+      # command=
+
+      ####################################################
+      # Automount Settings
+      ####################################################
 
       [automount]
-      # Controls whether Windows drives are automatically mounted under /mnt
-      # Available since: Windows 10 17093
+
+      # Controls whether Windows drives are automatically mounted
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -46,8 +91,8 @@ write_files:
       # - false
       enabled=true
 
-      # Automatically mount entries from /etc/fstab
-      # Available since: Windows 10 17093
+      # Controls whether /etc/fstab entries are automatically mounted
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -55,45 +100,60 @@ write_files:
       # - false
       mountFsTab=true
 
-      # Sets the mount point for automatically mounted drives
-      # Available since: Unknown
-      # Dependencies:
-      # [automount]
-      # enabled=true
+      # Sets the mount point for Windows mounted drives
+      # Available in: WSL 1/2
+      # Dependencies: automount.enabled=true
       # Default: /mnt/
-      # Values: Any valid directory path.
+      # Values: Any valid absolute directory path
       root=/mnt/
 
-      # Additional mount options passed to drvfs when mounting Windows drives (e.g., /mnt/c).
-      # These options control file ownership, permissions, and behavior of mounted Windows filesystems in WSL.
-      # Available since: Unknown
-      # Dependencies:
-      # [automount]
-      # enabled=true
-      # Default: None (WSL uses internal defaults if not specified)
-      # Values (comma-separated):
-      # - uid=UID         : User ID used as the owner of all files (default: 1000 – first created user).
-      # - gid=GID         : Group ID used as the owner of all files (default: 1000 – default user group).
-      # - umask=MODE      : Octal permission mask applied to all files and directories (default: 022).
-      # - fmask=MODE      : Octal mask applied only to files (default: 000).
-      # - dmask=MODE      : Octal mask applied only to directories (default: 000).
-      # - metadata        : Enables storage of Linux file permissions (uid/gid/mode) in Windows files (default: disabled).
-      # - case=MODE       : Controls case sensitivity behavior.
-      #   - off   : Case insensitivity (default).
-      #   - dir   : Enables case sensitivity for specific directories.
-      #   - force : Forces all new directories to be case-sensitive.
+      # Sets additional mount options
+      # Available in: WSL 1/2
+      # Dependencies: automount.enabled=true
+      # Default: None (Uses internal defaults if not specified)
+      #
+      # Options (comma-separated):
+      #
+      # +------------+-------------------------------------------------+----------+
+      # | Option     | Description                                     | Default  |
+      # |------------|-------------------------------------------------|----------|
+      # | metadata   | Enable Linux file permissions on mounted drives | Disabled |
+      # | uid=UID    | User ID used as owner of all files              | 1000     |
+      # | gid=GID    | Group ID used as owner of all files             | 1000     |
+      # | umask=MODE | Octal permission mask for files and directories | 022      |
+      # | fmask=MODE | Octal permission mask for files only            | 000      |
+      # | dmask=MODE | Octal permission mask for directories only      | 000      |
+      # | case=MODE  | Case sensitivity behavior (modes listed below)  | off      |
+      # +------------+-------------------------------------------------+----------+
+      #
+      # case=MODE modes:
+      #
+      # +--------+---------------------------------------------------+
+      # | Value  | Description                                       |
+      # |--------|---------------------------------------------------|
+      # | off    | Case insensitivity (default)                      |
+      # | dir    | Enables case sensitivity for specific directories |
+      # | force  | Forces all new directories to be case-sensitive   |
+      # +--------+---------------------------------------------------+
+      #
       # Example: options="metadata,uid=1000,gid=1000,umask=022,fmask=000,dmask=000,case=off"
-      options=
+      # options=
+
+      ####################################################
+      # Network Settings
+      ####################################################
 
       [network]
-      # Sets a custom hostname for the distro
-      # Available since: Windows 10 17093
+
+      # Sets a custom hostname
+      # Available in: WSL 1/2
       # Dependencies: None
-      # Default: If not set, WSL uses the Windows hostname
+      # Default: Windows hostname
+      # Value: Any valid hostname
       # hostname=
 
       # Controls whether /etc/resolv.conf is automatically generated
-      # Available since: Windows 10 17093
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -101,8 +161,8 @@ write_files:
       # - false
       generateResolvConf=true
 
-      # Controls whether WSL modifies /etc/hosts automatically
-      # Available since: Windows 10 17093
+      # Controls whether /etc/hosts is automatically generated
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -110,9 +170,29 @@ write_files:
       # - false
       generateHosts=true
 
+      ####################################################
+      # Time Settings
+      ####################################################
+
+      [time]
+
+      # Controls whether the Linux timezone is synchronized with the Windows host timezone
+      # Available in: WSL 2
+      # Dependencies: None
+      # Default: true
+      # Values:
+      # - true
+      # - false
+      useWindowsTimezone=true
+
+      ####################################################
+      # Interop Settings
+      ####################################################
+
       [interop]
-      # Enables Windows and Linux interop (launching Windows apps from Linux)
-      # Available since: Windows 10 17713
+
+      # Controls whether Windows and Linux interop (launching Windows apps from Linux)
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -120,8 +200,8 @@ write_files:
       # - false
       enabled=true
 
-      # Specifies whether to append Windows path to $PATH
-      # Available since: Windows 10 17713
+      # Controls whether to append Windows path to $PATH
+      # Available in: WSL 1/2
       # Dependencies: None
       # Default: true
       # Values:
@@ -129,35 +209,36 @@ write_files:
       # - false
       appendWindowsPath=true
 
+      ####################################################
+      # User Settings
+      ####################################################
+
       [user]
-      # Default Linux user for this distribution (username only, not UID)
-      # Available since: Windows 10 18980 
-      # Dependencies: Must be an existing user inside the distro
+
+      # Sets the default Linux user
+      # Available in: WSL 2
+      # Dependencies: Must be an existing user
       # Default: First created user
-      # Example: default=username
       default=<UserName>
 
-      # End of configuration file
-
-# Updating system packages and installing Python venv prerequisites
-
-package_update: true
-package_upgrade: true
-packages:
-  - python3-venv
-  - python3-pip
-
-# Creating the <UserName> user with home directory, shell, and sudo privileges
+############################################################################
+# Create the <UserName> user with home directory, shell, and sudo privileges
+############################################################################
 
 users:
   - name: <UserName>
     gecos: <UserName>
-    homedir: /home/<UserName>
+    home: /home/<UserName>
+    lock_passwd: false
     groups: sudo
     sudo: ALL=(ALL) ALL
     shell: /bin/bash
 
-# Setting password for <UserName> and disabling password expiration
+###############################################################
+# Set password for <UserName> and disabling password expiration
+###############################################################
+
+# To generate <Password Hash> use: openssl passwd -6 <Password>
 
 chpasswd:
   expire: false
@@ -165,7 +246,10 @@ chpasswd:
     - name: <UserName>
       password: <Password Hash>
 
-# Creating a Python virtual environment and installing Ansible-related tools at /home/<UserName>/ansible-venv
+#################################################################
+# Create a Python virtual environment and install Ansible-related
+# tools at: /home/<UserName>/ansible-venv
+#################################################################
 
 runcmd:
   - sudo -u <UserName> bash -c "python3 -m venv ~/ansible-venv"
