@@ -29,7 +29,7 @@ write_files:
   - path: /etc/wsl.conf
     owner: root:root
     permissions: "0644"
-    encoding: plain
+    encoding: text/plain
     content: |
       ####################################################
       # WSL per-distribution configuration file (wsl.conf)
@@ -228,7 +228,7 @@ write_files:
 users:
   - name: <UserName>
     gecos: <UserName>
-    home: /home/<UserName>
+    homedir: /home/<UserName>
     lock_passwd: false
     groups: sudo
     sudo: ALL=(ALL) ALL
