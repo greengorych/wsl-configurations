@@ -1,8 +1,27 @@
+################################################
 # WSL configuration file (.wslconfig)
-# Located at: C:\Users\<UserName>\.wslconfig
 # Controls global WSL2 virtual machine settings.
-# The latest version of this configuration file is available at:
+################################################
+
+# Location: C:\Users\<UserName>\.wslconfig
+
+# Purpose:
+#   - Configure kernel, its modules and parameters
+#   - Control CPU and memory usage
+#   - Set virtual machine disk size for new distributions
+#   - Define swap file size and location
+#   - Adjust networking and DNS behavior
+#   - Enable or disable proxy and firewall
+#   - Set port forwarding preferences
+
+# ==============================================
+# ⚠️ IMPORTANT
+# Has no effect on WSL1 distributions.
+# ==============================================
+
+# Reference:
 # https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
+
 
 [wsl2]
 
@@ -33,14 +52,14 @@
 # Example: processors=2
 # processors=
 
-# Limit the amount of RAM used by WSL2 virtual machine.
+# Limit the amount of RAM used by WSL virtual machine.
 # Available since: Windows 10 18362+
 # Dependencies: None
 # Default: 50% of total physical RAM
 # Example: memory=4GB
 # memory=
 
-# Swap file size used by WSL VM.
+# Swap file size used by WSL virtual machine.
 # Available since: Windows 10 18362+
 # Dependencies: None
 # Default: 25% of RAM, rounded to nearest GB
@@ -54,14 +73,14 @@
 # Example: swapFile=C:\\Path\\To\\swap.vhdx
 # swapFile=
 
-# Default virtual disk size (applies when creating new distros).
+# Controls the default virtual disk size used for new virtual machine.
 # Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: 1TB (dynamically allocated)
 # Example: defaultVhdSize=20GB
 defaultVhdSize=1TB
 
-# Virtual switch used for the WSL2 virtual machine.
+# Virtual switch used for the WSL virtual machine.
 # Available since: Windows 10 18362+
 # Dependencies: Required only for networkingMode=bridged. Requires Hyper-V and a manually created virtual switch.
 # Default: Default Switch (if not specified)
@@ -76,9 +95,35 @@ defaultVhdSize=1TB
 # - nat
 # - mirrored
 # - bridged
+# - virtioproxy
 networkingMode=nat
 
-# Enable or disable localhost port forwarding.
+# Set a fixed MAC address for the WSL virtual network adapter.
+# Available since: Windows 11 22H2+
+# Dependencies: Unknown
+# Default: Random MAC address per VM start
+# Example: macAddress=00:15:5D:00:01:02
+# macAddress=
+
+# Controls whether DHCP is used for the WSL network adapter.
+# Available since: Windows 11 22H2+
+# Dependencies: Unknown
+# Default: true
+# Values:
+# - true
+# - false
+dhcp=true
+
+# Controls whether IPv6 is used in WSL virtual networking.
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+ipv6=true
+
+# Controls whether localhost port forwarding is used between Windows and WSL.
 # Available since: Windows 10 18362+
 # Dependencies: Does not work in networkingMode=mirrored.
 # Default: true
@@ -87,7 +132,7 @@ networkingMode=nat
 # - false
 localhostForwarding=true
 
-# Enable DNS proxy between Windows and WSL.
+# Controls whether DNS requests from WSL are proxied through the Windows DNS resolver.
 # Available since: Windows 10 18362+
 # Dependencies: None
 # Default: true
@@ -96,8 +141,8 @@ localhostForwarding=true
 # - false
 dnsProxy=true
 
-# Tunnel DNS queries via Windows networking.
-# Available since: Windows 22H2+
+# Controls whether DNS queries from WSL are tunneled via the Windows networking stack instead of resolving directly in WSL.
+# Available since: Windows 11 22H2+
 # Dependencies:
 # - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
 # - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
@@ -107,7 +152,7 @@ dnsProxy=true
 # - false
 dnsTunneling=true
 
-# Enable Windows Firewall and Hyper-V network filters for WSL.
+# Controls whether Windows Firewall and Hyper-V network filters are applied to WSL.
 # Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: true
@@ -116,7 +161,7 @@ dnsTunneling=true
 # - false
 firewall=true
 
-# Use system proxy settings from Windows.
+# Controls whether WSL uses system proxy settings from Windows.
 # Available since: Windows 11
 # Dependencies: None
 # Default: true
@@ -125,16 +170,7 @@ firewall=true
 # - false
 autoProxy=true
 
-# Boot WSL in safe recovery mode.
-# Available since: Windows 11
-# Dependencies: None
-# Default: false
-# Values:
-# - true
-# - false
-safeMode=false
-
-# Enable support for GUI Linux apps (WSLg).
+# Controls whether GUI Linux applications (WSLg) are available.
 # Available since: Windows 11
 # Dependencies: None
 # Default: true
@@ -143,16 +179,7 @@ safeMode=false
 # - false
 guiApplications=true
 
-# Show debug console with dmesg output (opens on virtual machine startup).
-# Available since: Windows 11
-# Dependencies: None
-# Default: false
-# Values:
-# - true
-# - false
-debugConsole=false
-
-# Enable nested virtualization.
+# Controls whether nested virtualization is supported.
 # Available since: Windows 11
 # Dependencies: None
 # Default: true
@@ -161,15 +188,33 @@ debugConsole=false
 # - false
 nestedVirtualization=true
 
-# Time in milliseconds before the WSL VM is shut down after inactivity.
+# Time before WSL VM shuts down due to inactivity (in milliseconds).
 # Available since: Windows 11
 # Dependencies: None
 # Default: 60000 (1 minute). Set to 0 to keep the VM always running (disable auto shutdown).
 vmIdleTimeout=60000
 
+# Controls whether WSL boots in safe recovery mode.
+# Available since: Windows 11
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+safeMode=false
+
+# Controls whether a debug console with dmesg output is shown at virtual machine startup.
+# Available since: Windows 11
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+debugConsole=false
+
 [experimental]
 
-# Memory reclaim behavior
+# Controls the behavior of memory reclaim in the WSL virtual machine.
 # Available since: Windows 11
 # Dependencies: None
 # Default: gradual
@@ -179,7 +224,7 @@ vmIdleTimeout=60000
 # - dropcache: Release all cached memory after idle is detected
 autoMemoryReclaim=gradual
 
-# Enable dynamically shrinking virtual disk
+# Controls whether the virtual disk can dynamically shrink to save space.
 # Available since: Windows 11 
 # Dependencies: None
 # Default: true
@@ -188,7 +233,7 @@ autoMemoryReclaim=gradual
 # - false
 sparseVhd=true
 
-# Improve DNS parsing compatibility
+# Controls whether DNS parsing compatibility is improved.
 # Available since: Windows 11 22H2+
 # Dependencies:
 # - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
@@ -200,7 +245,7 @@ sparseVhd=true
 # - false
 bestEffortDnsParsing=false
 
-# IP address to use for DNS tunneling (when enabled)
+# Controls the IP address used for DNS tunneling.
 # Available since: Windows 11 22H2+
 # Dependencies:
 # - Must be used with networkingMode=nat
@@ -209,20 +254,20 @@ bestEffortDnsParsing=false
 # Default: 10.255.255.254
 dnsTunnelingIpAddress=10.255.255.254
 
-# Timeout for reading Windows proxy on startup (in milliseconds).
+# Controls the timeout for reading Windows proxy settings on startup (in milliseconds).
 # Available since: Windows 11
 # Dependencies: autoProxy=true (if autoProxy=false, initialAutoProxyTimeout becomes irrelevant).
 # Default: 1000
 initialAutoProxyTimeout=1000
 
-# Ignore specific ports in mirrored mode
+# Controls whether specific ports are ignored in mirrored networking mode.
 # Available since: Windows 11 22H2+
 # Dependencies: networkingMode=mirrored 
 # Default: Not set
 # Example: ignoredPorts=3000,8080
 # ignoredPorts=
 
-# Allow host and container to connect via loopback (127.0.0.1 from inside containers)
+# Allows the host and container to communicate via loopback (127.0.0.1 from inside containers).
 # Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: false
@@ -230,5 +275,3 @@ initialAutoProxyTimeout=1000
 # - true
 # - false
 hostAddressLoopback=false
-
-# End of configuration file
