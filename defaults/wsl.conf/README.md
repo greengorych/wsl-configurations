@@ -40,7 +40,7 @@ To apply the configuration:
 3. Save the file at `/etc/wsl.conf` inside your WSL instance.
 
 >[!TIP]
->Refer to the [**.cloud-init**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init) example and its provided configuration file to automate `wsl.conf` creation.
+>Refer to the [**cloud-init**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/wsl-conf) example and its provided configuration file to automate `wsl.conf` creation.
 
 ## How to Apply Changes?
 
@@ -59,4 +59,4 @@ wsl -d <InstanceName>
 ## Related links
 
 - [Advanced settings configuration in WSL](https://learn.microsoft.com/en-us/windows/wsl/wsl-config)
-- [default.user-data – Default cloud-init Configuration File](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init)
+- [default.user-data – Default cloud-init Configuration File](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/wsl-conf)
