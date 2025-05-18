@@ -3,23 +3,31 @@
 ## Overview
 
 A curated set of configuration files and usage examples for Windows Subsystem for Linux (WSL).
-This repository helps you customize, optimize and automate deployment your WSL environment with:
+This repository helps you customize, optimize and automate the deployment of your WSL environment with:
 
-- **.wslconfig** - global configuration file for the WSL2 virtual michines.
-- **wsl.conf** - per-distribution configuration file.
-- **cloud-init** - a set of tools for automatically configuring virtual machines when they are first launched.
+- **.wslconfig** – a global configuration file for Windows Subsystem for Linux, which applies only to WSL 2 virtual machines.
+- **wsl.conf** – a per-distribution configuration file used by both WSL 1 and WSL 2 virtual machines.
+- **cloud-init** – a set of tools for automatically configuring virtual machines at first boot.
+- **ansible** – an automation tool used for configuration management, application deployment, and task automation across systems.
 
 ## Repository Structure
 
 ### Defaults
 
-- [**.wslconfig**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.wslconfig) - a fully commented default configuration file that replicates the behavior of WSL2 as if no configuration file were present.
-- [**wsl.conf**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/wsl.conf) - a fully commented default configuration file that replicates the behavior of individual WSL distributions as if it were the original configuration file shipped with the distro.
+- [**.wslconfig**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/.wslconfig) - a fully documented global configuration file for Windows Subsystem for Linux, applicable only to WSL 2 virtual machines. It describes all known parameters, their possible values, dependencies, and default settings.
+- [**wsl.conf**](https://github.com/greengorych/wsl-configurations/tree/main/defaults/wsl.conf) - a fully commented per-distribution configuration file used by both WSL 1 and WSL 2 virtual machines. It describes all known parameters, their possible values and default settings.
 
 ### cloud-init
 
-- [**wsl.conf**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/wsl-conf) - a fully commented cloud-init **default.user-data** configuration file, tailored specifically for WSL (Windows Subsystem for Linux) distributions that support initialization through cloud-init.
-- [**ansible-venv**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/ansible-venv) - Creating a Python Virtual Environment with Ansible Tools.
+> [!IMPORTANT]
+> The examples in this section require WSL 1 or 2 distributions that support initialization via cloud-init.
+
+- [**cloud-init-wsl-conf**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/cloud-init-wsl-conf) – a fully commented cloud-init configuration that generates and customizes `wsl.conf`, creates a user, and sets their password at first boot.
+- [**cloud-init-ansible-venv**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/cloud-init-ansible-venv) – a fully commented cloud-init configuration that sets up a Python virtual environment and installs Ansible and related tools.
+
+### Ansible
+
+- [**ansible-role-wsl-conf**](https://github.com/greengorych/ansible-role-wsl-conf) - Ansible role for generating or modifying `wsl.conf` for WSL 1 and 2 distributions.
 
 ## How to Use
 
