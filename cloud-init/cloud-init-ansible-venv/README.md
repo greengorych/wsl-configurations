@@ -2,7 +2,7 @@
 
 ## Overview
 
- This `cloud-init` configuration extends the [`default.user-data`](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/ansible-venv) by adding a Python virtual environment and installing key Ansible development tools: `ansible`, `ansible-lint`, and `molecule`.
+ This `cloud-init` configuration extends the [`default.user-data`](https://github.com/greengorych/wsl-configurations/blob/main/cloud-init/cloud-init-ansible-venv) by adding a Python virtual environment and installing key Ansible development tools: `ansible`, `ansible-lint`, and `molecule`.
 
 ## What are **ansible**, **ansible-lint** and **molecule**?
 
@@ -153,4 +153,4 @@ pip install "resolvelib<1.1.0,>=0.5.3"
 ## Related links
 
 - [wsl.conf - Default WSL per-distribution Configuration File](https://github.com/greengorych/wsl-configurations/tree/main/defaults/wsl.conf)
-- [default.user-data – Default cloud-init Configuration File](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/wsl-conf)
+- [default.user-data – Default cloud-init Configuration File](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/cloud-init-wsl-conf)

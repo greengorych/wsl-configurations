@@ -17,7 +17,8 @@
 # =======================================================
 
 # Reference:
-# https://github.com/greengorych/wsl-configurations/tree/main/defaults/.cloud-init
+# Configuration: https://github.com/greengorych/wsl-configurations/blob/main/cloud-init/cloud-init-wsl-conf/default.user-data
+# Documentation: https://github.com/greengorych/wsl-configurations/blob/main/cloud-init/cloud-init-wsl-conf/README.md
 
 
 #####################################################

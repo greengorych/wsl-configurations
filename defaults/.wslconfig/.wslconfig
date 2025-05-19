@@ -20,7 +20,8 @@
 # ==============================================
 
 # Reference:
-# https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
+# Configuration: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
+# Documentation: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/README.md
 
 
 [wsl2]

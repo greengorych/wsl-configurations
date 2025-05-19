@@ -78,7 +78,7 @@ If you will see message: `status: error`, you need find the reason that caused t
 
 ### Apply Changes
 
-To apply changes made to сдщгв-штше, you need to restart your WSL distribution. You can do this by running:
+To apply changes made to cloud-init, you need to restart your WSL distribution. You can do this by running:
 
 ```powershell
 wsl -d <DistroName> --shutdown
