@@ -20,14 +20,15 @@ This repository helps you customize, optimize and automate the deployment of you
 ### cloud-init
 
 > [!IMPORTANT]
-> The examples in this section require WSL 1 or 2 distributions that support initialization via cloud-init.
+> The examples in this section require WSL 1 or WSL 2 distributions that support initialization via cloud-init.
 
 - [**cloud-init-wsl-conf**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/cloud-init-wsl-conf) – a fully commented cloud-init configuration that generates and customizes `wsl.conf`, creates a user, and sets their password at first boot.
 - [**cloud-init-ansible-venv**](https://github.com/greengorych/wsl-configurations/tree/main/cloud-init/cloud-init-ansible-venv) – a fully commented cloud-init configuration that sets up a Python virtual environment and installs Ansible and related tools.
 
 ### Ansible
 
-- [**ansible-role-wsl-conf**](https://github.com/greengorych/ansible-role-wsl-conf) - Ansible role for generating or modifying `wsl.conf` for WSL 1 and 2 distributions.
+- [**ansible-role-wsl-conf**](https://github.com/greengorych/ansible-role-wsl-conf) - Ansible role for generating or modifying `wsl.conf` for WSL 1 and WSL 2 distributions.
+- [**ansible-role-wslconfig**](https://github.com/greengorych/ansible-role-wslconfig)- Ansible role for manageing Windows Subsystem for Linux (WSL) global configuration file `.wslconfig`.
 
 ## How to Use
 
