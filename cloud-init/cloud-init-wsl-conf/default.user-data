@@ -63,7 +63,7 @@ write_files:
       [boot]
 
       # Controls whether systemd support is enabled or disabled
-      # Available in: WSL 1/2
+      # Available in: WSL 2
       # Dependencies: None
       # Default: true
       # Values:
