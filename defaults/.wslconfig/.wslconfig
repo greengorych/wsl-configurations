@@ -1,5 +1,5 @@
 # WSL configuration file (.wslconfig)
-# Controls global WSL2 virtual machine settings.
+# Controls global WSL 2 virtual machine settings.
 
 # Location: C:\Users\<UserName>\.wslconfig
 
@@ -12,7 +12,7 @@
 #   - Enable or disable proxy and firewall
 #   - Set port forwarding preferences
 
-# ⚠️ IMPORTANT: Has no effect on WSL1 distributions.
+# ⚠️ IMPORTANT: Has no effect on WSL 1 distributions.
 
 # Reference:
 # Configuration: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
@@ -97,7 +97,6 @@ defaultVhdSize=1TB
 networkingMode=nat
 
 # Set a fixed MAC address for the WSL virtual network adapter.
-# Available since: Windows 11 22H2+.
 # Dependencies: Unknown.
 # Default: Random MAC address per VM start.
 # Example: macAddress=00:15:5D:00:01:02
