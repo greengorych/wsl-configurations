@@ -19,6 +19,18 @@
 # Documentation: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/README.md
 
 
+[general]
+
+# Controls how long the WSL instance stays alive when idle.
+# Dependencies: If systemd is enabled in wsl.conf, the instance will remain running regardless of this timeout.
+# Default: 9000 (9 seconds).
+# Values:
+# - -1: Never shut down the instance automatically
+# -  0: Shut down immediately after all processes exit
+# -  Positive integer: Shut down after the specified idle time (in milliseconds)
+instanceIdleTimeout=9000
+
+
 [wsl2]
 
 # Absolute Windows path to a custom Linux kernel.
