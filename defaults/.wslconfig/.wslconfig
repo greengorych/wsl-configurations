@@ -177,9 +177,13 @@ guiApplications=true
 # - false
 nestedVirtualization=true
 
-# Time before WSL VM shuts down due to inactivity (in milliseconds).
-# Dependencies: None.
-# Default: 60000 (1 minute). Set to 0 to keep the VM always running (disable auto shutdown).
+# Controls how long the WSL virtual machine stays running when idle.
+# Dependencies: None
+# Default: 60000 (60 seconds)
+# Values:
+# - -1: Never shut down the WSL virtual machineautomatically
+# -  0: Shut down immediately after all WSL instances have exited
+# -  Positive integer: Shut down after the specified idle time (in milliseconds)
 vmIdleTimeout=60000
 
 # Controls whether WSL boots in safe recovery mode.
