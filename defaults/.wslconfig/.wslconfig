@@ -1,7 +1,5 @@
-################################################
 # WSL configuration file (.wslconfig)
-# Controls global WSL2 virtual machine settings.
-################################################
+# Controls global WSL2  virtual machine settings.
 
 # Location: C:\Users\<UserName>\.wslconfig
 
@@ -14,10 +12,8 @@
 #   - Enable or disable proxy and firewall
 #   - Set port forwarding preferences
 
-# ==============================================
-# ⚠️ IMPORTANT
-# Has no effect on WSL1 distributions.
-# ==============================================
+
+# ⚠️ IMPORTANT: Has no effect on WSL1 distributions.
 
 # Reference:
 # Configuration: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
@@ -190,6 +186,7 @@ safeMode=false
 # - true
 # - false
 debugConsole=false
+
 
 [experimental]
 
