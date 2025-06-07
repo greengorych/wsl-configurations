@@ -202,6 +202,14 @@ safeMode=false
 # - false
 debugConsole=false
 
+# Controls whether hardware performance counters are exposed to WSL instances.
+# Dependencies: Requires hardware and virtualization support.
+# Default: false
+# Values:
+# - true: Enable hardware performance counters
+# - false: Disable hardware performance counters
+hardwarePerformanceCounters=false
+
 
 [experimental]
 
