@@ -201,6 +201,15 @@ safeMode=false
 # - false
 debugConsole=false
 
+# Limits the number of crash dumps collected for the WSL 2 virtual machine.
+# Dependencies: None.
+# Default: Unlimited (no automatic cleanup).
+# Values:
+# - -1: Disable crash dump collection
+# -  0: Not documented, likely disables saving but unconfirmed
+# -  Positive integer: Maximum number of dumps to keep
+# MaxCrashDumpCount=
+
 # Controls whether hardware performance counters are exposed to WSL instances.
 # Dependencies: Requires hardware and virtualization support.
 # Default: false
