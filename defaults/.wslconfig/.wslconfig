@@ -204,6 +204,7 @@ debugConsole=false
 # Limits the number of crash dumps collected for the WSL 2 virtual machine.
 # Dependencies: None.
 # Default: Unlimited (no automatic cleanup).
+# Dump location: %LOCALAPPDATA%\Temp\wsl-crashes
 # Values:
 # - -1: Disable crash dump collection
 # -  0: Not documented, likely disables saving but unconfirmed
