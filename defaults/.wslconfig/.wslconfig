@@ -71,6 +71,7 @@ instanceIdleTimeout=8000
 # Custom path for swap file.
 # Dependencies: None.
 # Default: A temporary path like %USERPROFILE%\AppData\Local\Temp\<GUID>\swap.vhdx.
+# Note: The GUID part changes with every WSL instance start, so the path is not stable across sessions.
 # Example: swapFile=C:\\Path\\To\\swap.vhdx
 # swapFile=
 
