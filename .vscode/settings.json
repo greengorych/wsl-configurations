@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    ".wslconfig": "ini",
+    "wsl.conf": "ini",
+    "default.user-data": "yaml"
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/canonical/cloud-init/main/cloudinit/config/schemas/versions.schema.cloud-config.json": [
+      "**/default.user-data"
+    ]
+  }
+}
